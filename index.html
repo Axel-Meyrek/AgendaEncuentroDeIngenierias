@@ -1,11 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- METAS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- STYLE -->
+    <link rel="stylesheet" href="./css/index.css">
+    <!-- JAVASCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+    <script src="./js/particles.js" defer></script>
+    <script src="./js/index.js" defer></script>
+    <!-- GENERAL -->
     <title>Agenda Encuentro de Ingenierias</title>
 </head>
 <body>
-    <h1>Pronto veremos una agenda impresionante</h1>
+    <div id="particles-js"></div>
+    
+    <div class="containerImg contenedor1"><img src="./img/02.png" alt=""></div>
+    <div class="containerImg contenedor2"><img src="./img/03.png" alt=""></div>
+    <div class="containerImg contenedor3"><img src="./img/04.png" alt=""></div>
+
+    <main class="main">
+        <img class="logo imagen-animada" src="https://5-to-encuentro-de-ingenierias-upaep.vercel.app/img/logoEvento.svg" alt="">
+    </main>
+
+
+
+    <style>
+        body {
+            background-image: url('./img/01.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            position: relative;
+            color: white;
+        }
+
+        .containerImg {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+        }
+
+        .containerImg img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        .logo {
+            width: 80%;
+            max-width: 450px;
+            margin-top: 3em;
+            z-index: 0;
+            position: absolute;
+        }
+
+        .contenedor1 {
+            z-index: 1;
+            animation: entradaEficio 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .contenedor2 {
+            z-index: 2;
+            animation: entradaPiso 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+        }
+
+        .contenedor3 {
+            z-index: 3;
+            animation: entradaEficioSecundario 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+        }
+
+        .main {
+            align-items: center;
+            display: flex;
+            flex-direction: column; 
+            text-align: center;
+            margin: 0 auto;
+            max-width: 800px;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 4;
+        }
+
+        .imagen-animada {
+            animation: subirImagen 4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes subirImagen {
+            0% {
+                transform: translateY(50vh);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes entradaEficio {
+            0% {
+                transform: translateX(20px);
+
+            }
+            100% {
+                transform: translateY(0);
+
+            }
+        }
+
+        @keyframes entradaEficioSecundario {
+            0% {
+                transform: translateX(-20vh);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes entradaPiso {
+            0% {
+                transform: translateY(20vh);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+
+        
+
+    </style>
 </body>
 </html>
