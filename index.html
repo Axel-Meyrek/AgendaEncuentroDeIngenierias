@@ -21,7 +21,7 @@
     <div class="containerImg contenedor3"><img src="./img/piso.webp" alt=""></div>
 
     <main class="main">
-        <img class="logo imagen-animada" src="https://5-to-encuentro-de-ingenierias-upaep.vercel.app/img/logoEvento.svg" alt="">
+        <img class="logo imagen-animada" src="./img/logo.webp" alt="">
     </main>
 
 
@@ -59,20 +59,21 @@
         }
 
         .contenedor1 {
-            z-index: 1;
+            z-index: 2;
             animation: entradaEficio 6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .contenedor2 {
-            z-index: 2;
+            z-index: 3;
             animation: entradaEficioSecundario 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 
         }
 
         .contenedor3 {
-            z-index: 3;
-            animation: entradaPiso 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-
+            z-index: 1;
+            animation: entradaPiso 1s ease-out forwards;
+            opacity: 0;
+            animation-delay: .5s;
         }
 
         .main {
@@ -141,15 +142,10 @@
         }
         
         @keyframes entradaPiso {
-            0% {
-                transform: translateY(20vh);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
+            to {
                 opacity: 1;
             }
-        }
+        }   
         
 
         
