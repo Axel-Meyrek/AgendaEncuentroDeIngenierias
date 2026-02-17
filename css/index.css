@@ -89,31 +89,65 @@ body {
 }
 
 .botonera_button {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid white;
-    color: white;
-    padding: 0.5em 1.5em;
-    font-size: 1em;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.7em 2em;
+    font-size: 0.95em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     max-height: 50px;
     width: 100%;
     max-width: 200px;
-    border-radius: 4px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.botonera_button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transition: left 0.5s ease;
+}
+
+.botonera_button:hover::before {
+    left: 100%;
 }
 
 .botonera_button:hover {
-    scale: 1.05;
+    border-color: rgba(199, 68, 106, 0.6);
+    color: white;
+    background: rgba(199, 68, 106, 0.1);
+    box-shadow: 0 0 20px rgba(199, 68, 106, 0.15), inset 0 0 20px rgba(199, 68, 106, 0.05);
+    transform: translateY(-2px);
 }
 
 .botonera_button:active {
-    background-color: #C7446A;
-    box-shadow: 1px 1px 10px 5px #C7446A;
+    transform: translateY(0);
+    background: rgba(199, 68, 106, 0.3);
+    box-shadow: 0 0 15px rgba(199, 68, 106, 0.3);
 }
 
 .buttonActive {
-    background-color: #C7446A;
-    box-shadow: 1px 1px 10px 5px #C7446A;
+    background: linear-gradient(135deg, rgba(199, 68, 106, 0.8), rgba(199, 68, 106, 0.5));
+    border-color: rgba(199, 68, 106, 0.6);
+    color: white;
+    box-shadow: 0 0 25px rgba(199, 68, 106, 0.3), 0 0 60px rgba(199, 68, 106, 0.1);
+}
+
+.buttonActive:hover {
+    background: linear-gradient(135deg, rgba(199, 68, 106, 0.9), rgba(199, 68, 106, 0.6));
+    box-shadow: 0 0 30px rgba(199, 68, 106, 0.4), 0 0 80px rgba(199, 68, 106, 0.15);
 }
 
 .logo.logo-small {
@@ -170,5 +204,27 @@ body {
 @media (width < 700px) {
     .containerLogo {
         align-items: center;
+    }
+}
+
+@media (width < 500px) {
+    .botonera {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8em;
+    }
+
+    .botonera_button {
+        max-width: 280px;
+        font-size: 0.9em;
+        padding: 0.65em 1.8em;
+    }
+}
+
+@media (width < 400px) {
+    .botonera_button {
+        max-width: 100%;
+        font-size: 0.85em;
+        padding: 0.6em 1.5em;
     }
 }
