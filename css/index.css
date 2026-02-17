@@ -84,9 +84,9 @@ body {
     display: flex;
     gap: 1em;
     padding: 1em;
-    position: relative;
     position: sticky;
     top: 30px;
+    z-index: 1000;
 }
 
 .botonera_button {
@@ -212,115 +212,29 @@ body {
     gap: 1.2em;
     position: relative;
     z-index: 999;
-    padding-bottom: 60vh;
+    min-height: 200dvh;
     position: sticky;
     top: 120px;
 }
 
-/* Overlay oscuro cuando una card está activa */
-.card-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 20, 0.75);
-    z-index: 998;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-}
-
-.card-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* Card con perspectiva 3D */
 .card {
-    perspective: 1000px;
     position: sticky;
     top: 120px;
-    cursor: pointer;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                z-index 0s;
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-}
-
-.card.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.card.flipped {
-    z-index: 1000;
-    transform: scale(1.15);
-    opacity: 1;
 }
 
 .card_inner {
-    position: relative;
     width: 100%;
-    height: 100%;
     min-height: 160px;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-}
-
-.card.flipped .card_inner {
-    transform: rotateY(180deg);
-}
-
-.card_front,
-.card_back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
     border-radius: 16px;
     padding: 1.5em;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     display: flex;
     flex-direction: column;
     gap: 0.6em;
-}
-
-.card_front {
-    transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
-}
-
-.card:hover .card_front {
-    border-color: rgba(199, 68, 106, 0.6);
-    background: rgba(199, 68, 106, 0.08);
-    box-shadow: 0 0 20px rgba(199, 68, 106, 0.15), inset 0 0 20px rgba(199, 68, 106, 0.05);
-}
-
-.card_back {
-    transform: rotateY(180deg);
-    background: linear-gradient(135deg, rgba(199, 68, 106, 0.15), rgba(0, 0, 29, 0.9));
-    border-color: rgba(199, 68, 106, 0.5);
-    justify-content: center;
-}
-
-.card_back_title {
-    font-size: 0.8em;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(199, 68, 106, 0.9);
-    font-weight: 600;
-    margin-bottom: 0.3em;
-}
-
-.card_back_desc {
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.5;
 }
 
 .card_ponencia {
