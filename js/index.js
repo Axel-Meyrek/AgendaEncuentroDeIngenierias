@@ -1,6 +1,7 @@
 const logo = document.querySelector('.logo');
 const containerCards = document.querySelector('.containerCards');
 const buttons = document.querySelectorAll('.botonera_button');
+const scrollHint = document.getElementById('scrollHint');
 
 let charlas = [];
 let diaActivo = '10 de marzo'; // Martes por defecto
@@ -37,8 +38,10 @@ function updateCardVisibility() {
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         logo.classList.add('logo-small');
+        scrollHint.classList.add('scroll-hint--hidden');
     } else {
         logo.classList.remove('logo-small');
+        scrollHint.classList.remove('scroll-hint--hidden');
     }
     updateCardVisibility();
 });
