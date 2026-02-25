@@ -3,6 +3,10 @@ const containerCards = document.querySelector('.containerCards');
 const buttons = document.querySelectorAll('.botonera_button');
 const scrollHint = document.getElementById('scrollHint');
 
+const avatarCharacter = document.getElementById('avatarCharacter');
+const randomIndex = Math.floor(Math.random() * 5) + 1;
+avatarCharacter.querySelector('img').src = `./img/avatars/Ing${randomIndex}.webp`;
+
 let charlas = [];
 let diaActivo = '10 de marzo'; // Martes por defecto
 
@@ -44,6 +48,12 @@ window.addEventListener('scroll', () => {
         scrollHint.classList.remove('scroll-hint--hidden');
     }
     updateCardVisibility();
+
+    // Avatar disappear effect
+    const scrollThreshold = window.innerHeight * 0.4;
+    const progress = Math.min(window.scrollY / scrollThreshold, 1);
+    avatarCharacter.style.opacity = 1 - progress;
+    avatarCharacter.style.transform = `translateX(-50%) translateY(${progress * 60}px)`;
 });
 
 
