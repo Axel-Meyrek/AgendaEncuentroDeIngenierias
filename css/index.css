@@ -270,7 +270,7 @@ body {
 
 .card_ponente {
     font-size: 0.9em;
-    color: rgba(199, 68, 106, 0.9);
+    color: white;
     font-weight: 500;
     display: -webkit-box;
     -webkit-line-clamp: 2;
