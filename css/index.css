@@ -209,6 +209,7 @@ body {
     padding: 1em;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 220px;
     gap: 1.2em;
     position: relative;
     z-index: 999;
@@ -220,11 +221,12 @@ body {
 .card {
     position: sticky;
     top: 120px;
+    height: 100%;
 }
 
 .card_inner {
     width: 100%;
-    min-height: 160px;
+    height: 100%;
     border-radius: 16px;
     padding: 1.5em;
     background: rgba(255, 255, 255, 0.08);
@@ -235,6 +237,23 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.6em;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.card_inner:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-3px);
+}
+
+.card_inner.card--hidden {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    transition: none;
 }
 
 .card_ponencia {
@@ -242,12 +261,20 @@ body {
     font-weight: 600;
     color: white;
     line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card_ponente {
     font-size: 0.9em;
     color: rgba(199, 68, 106, 0.9);
     font-weight: 500;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card_horario {
@@ -274,6 +301,7 @@ body {
 @media (width < 500px) {
     .containerCards {
         grid-template-columns: 1fr;
+        grid-auto-rows: 240px;
     }
 
     .botonera {
@@ -299,4 +327,150 @@ body {
         font-size: 0.85em;
         padding: 0.6em 1.5em;
     }
+}
+
+/* ── Skeleton loader ── */
+@keyframes shimmer {
+    0%   { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+@keyframes skFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.card--skeleton {
+    animation: skFadeIn 0.35s ease both;
+    animation-delay: var(--sk-delay, 0s);
+}
+
+.card_inner--skeleton {
+    cursor: default;
+    pointer-events: none;
+    gap: 0.75em;
+}
+
+.card_inner--skeleton:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sk-line {
+    border-radius: 6px;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.13) 40%,
+        rgba(255, 255, 255, 0.05) 80%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s ease-in-out infinite;
+    animation-delay: var(--sk-delay, 0s);
+}
+
+.sk-title   { height: 1.05em; }
+.sk-ponente { height: 0.9em;  width: 62%;
+    background: linear-gradient(
+        90deg,
+        rgba(199, 68, 106, 0.15) 0%,
+        rgba(199, 68, 106, 0.32) 40%,
+        rgba(199, 68, 106, 0.15) 80%
+    );
+    background-size: 200% 100%;
+}
+.sk-horario { height: 0.85em; width: 44%; }
+.sk-lugar   { height: 0.8em;  width: 56%; }
+
+/* ── Modal ── */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5em;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal.modal--open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal_inner {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 2em 2em 1.8em;
+    background: rgba(255, 255, 255, 0.11);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(32px) saturate(1.5);
+    -webkit-backdrop-filter: blur(32px) saturate(1.5);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+    transform: scale(0.92) translateY(12px);
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal.modal--open .modal_inner {
+    transform: scale(1) translateY(0);
+}
+
+.modal_close {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1em;
+    line-height: 1;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+}
+
+.modal_close:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: white;
+}
+
+.modal_ponencia {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: white;
+    line-height: 1.35;
+    padding-right: 2.2em;
+}
+
+.modal_ponente {
+    font-size: 1em;
+    color: rgba(199, 68, 106, 0.95);
+    font-weight: 500;
+}
+
+.modal_horario {
+    font-size: 0.92em;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.modal_lugar {
+    font-size: 0.88em;
+    color: rgba(255, 255, 255, 0.48);
+    font-style: italic;
 }
