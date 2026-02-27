@@ -70,6 +70,22 @@ function parseHora(horario) {
     return horas * 60 + minutos;
 }
 
+// Convert "8:00 am - 9:00 am" to "08:00 - 09:00"
+function convertirSegmento(seg) {
+    const match = seg.trim().match(/(\d{1,2}):(\d{2})\s*(am|pm)/i);
+    if (!match) return seg.trim();
+    let h = parseInt(match[1]);
+    const m = match[2];
+    const p = match[3].toLowerCase();
+    if (p === 'pm' && h < 12) h += 12;
+    if (p === 'am' && h === 12) h = 0;
+    return `${String(h).padStart(2, '0')}:${m}`;
+}
+
+function convertirA24h(horario) {
+    return horario.split('-').map(convertirSegmento).join(' - ');
+}
+
 // Escape text for use in HTML attributes
 function escAttr(str) {
     return (str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
@@ -90,7 +106,7 @@ function crearCardHTML(charla) {
             <div class="card_inner">
                 <p class="card_ponencia">${titulo}</p>
                 ${ponente ? `<p class="card_ponente">${ponente}</p>` : ''}
-                <p class="card_horario">${horario}</p>
+                <p class="card_horario">${convertirA24h(horario)}</p>
                 ${lugar ? `<p class="card_lugar">${lugar}</p>` : ''}
             </div>
         </div>
@@ -109,7 +125,7 @@ function openModal({ titulo, ponente, horario, lugar }) {
     modalPonencia.textContent = titulo;
     modalPonente.textContent  = ponente || '';
     modalPonente.hidden       = !ponente;
-    modalHorario.textContent  = horario;
+    modalHorario.textContent  = convertirA24h(horario);
     modalLugar.textContent    = lugar || '';
     modalLugar.hidden         = !lugar;
     modal.setAttribute('aria-hidden', 'false');
