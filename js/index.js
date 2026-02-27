@@ -1,3 +1,5 @@
+window.scrollTo(0, 0);
+
 const logo = document.querySelector('.logo');
 const containerCards = document.querySelector('.containerCards');
 const buttons = document.querySelectorAll('.botonera_button');
@@ -106,7 +108,7 @@ function crearCardHTML(charla) {
             <div class="card_inner">
                 <p class="card_ponencia">${titulo}</p>
                 ${ponente ? `<p class="card_ponente">${ponente}</p>` : ''}
-                <p class="card_horario">${convertirA24h(horario)}</p>
+                <p class="card_horario">${convertirA24h(horario)} hrs</p>
                 ${lugar ? `<p class="card_lugar">${lugar}</p>` : ''}
             </div>
         </div>
