@@ -11,9 +11,9 @@ let charlas = [];
 let diaActivo = '10 de marzo'; // Martes por defecto
 
 const diasMap = {
-    'Martes': '10 de marzo',
-    'Miércoles': '11 de marzo',
-    'Jueves': '12 de marzo'
+    'Martes 10 de marzo': '10 de marzo',
+    'Miércoles 11 de marzo': '11 de marzo',
+    'Jueves 12 de marzo': '12 de marzo'
 };
 
 function updateCardVisibility() {
