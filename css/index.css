@@ -243,9 +243,11 @@ body {
     transition: background 0.2s, transform 0.2s;
 }
 
-.card_inner:hover {
-    background: rgba(255, 255, 255, 0.14);
-    transform: translateY(-3px);
+@media (hover: hover) {
+    .card_inner:hover {
+        background: rgba(255, 255, 255, 0.14);
+        transform: translateY(-3px);
+    }
 }
 
 .card_inner.card--hidden {
