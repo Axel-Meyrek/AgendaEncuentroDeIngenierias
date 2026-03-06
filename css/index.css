@@ -335,6 +335,10 @@ add-to-calendar-button {
     flex-shrink: 0;
 }
 
+.atcb-bgoverlay {
+    display: none !important;
+}
+
 .card_ponencia {
     font-size: 1em;
     font-weight: 600;
