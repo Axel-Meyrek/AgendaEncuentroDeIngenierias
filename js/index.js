@@ -106,10 +106,14 @@ function crearCardHTML(charla) {
              data-horario="${escAttr(horario)}"
              data-lugar="${escAttr(lugar)}">
             <div class="card_inner">
-                <p class="card_ponencia">${titulo}</p>
-                ${ponente ? `<p class="card_ponente">${ponente}</p>` : ''}
-                <p class="card_horario">${convertirA24h(horario)} hrs.</p>
-                ${lugar ? `<p class="card_lugar">${lugar}</p>` : ''}
+                <div class="card_body">
+                    <p class="card_ponencia">${titulo}</p>
+                    ${ponente ? `<p class="card_ponente">${ponente}</p>` : ''}
+                </div>
+                <div class="card_footer">
+                    <span class="card_horario">${convertirA24h(horario)} hrs.</span>
+                    ${lugar ? `<span class="card_lugar">${lugar}</span>` : ''}
+                </div>
             </div>
         </div>
     `;
