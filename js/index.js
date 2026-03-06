@@ -99,19 +99,50 @@ function crearCardHTML(charla) {
     const ponente = charla['Nombre del Ponente'];
     const horario = charla['Horario'];
     const lugar = charla['Lugar'];
+    const esFeatured = ponente === 'Axel Velasco Chávez';
+
+    const fechaMap = {
+        '10 de marzo': '2026-03-10',
+        '11 de marzo': '2026-03-11',
+        '12 de marzo': '2026-03-12'
+    };
+    const startDate = fechaMap[charla['Fecha']] || '2026-03-10';
+    const partes24 = convertirA24h(horario).split(' - ');
+    const startTime = partes24[0];
+    const endTime = partes24[1] || partes24[0];
+
+    const glassStyle = '--btn-background:rgba(255,255,255,0.07);--btn-border:1px solid rgba(255,255,255,0.22);--btn-text:rgba(255,255,255,0.85);--btn-shadow:none;--btn-hover-background:rgba(255,255,255,0.14);--btn-hover-border:1px solid rgba(255,255,255,0.45);--btn-font-weight:500;--btn-radius:50px;';
+
     return `
         <div class="card"
              data-titulo="${escAttr(titulo)}"
              data-ponente="${escAttr(ponente)}"
              data-horario="${escAttr(horario)}"
              data-lugar="${escAttr(lugar)}">
-            <div class="card_inner">
+            <div class="card_inner${esFeatured ? ' card_inner--featured' : ''}">
                 <div class="card_body">
                     <p class="card_ponencia">${titulo}</p>
                     ${ponente ? `<p class="card_ponente">${ponente}</p>` : ''}
                 </div>
                 <div class="card_footer">
-                    <span class="card_horario">${convertirA24h(horario)} hrs.</span>
+                    <div class="card_footer_row">
+                        <span class="card_horario">${convertirA24h(horario)} hrs.</span>
+                        <add-to-calendar-button
+                            name="${escAttr(titulo)}"
+                            startDate="${startDate}"
+                            startTime="${startTime}"
+                            endTime="${endTime}"
+                            timeZone="America/Monterrey"
+                            location="${escAttr(lugar)}"
+                            options="'Apple','Google','iCal','Outlook.com','Yahoo'"
+                            trigger="click"
+                            listStyle="overlay"
+                            size="1"
+                            label="Agendar"
+                            styleLight="${glassStyle}"
+                            styleDark="${glassStyle}"
+                        ></add-to-calendar-button>
+                    </div>
                     ${lugar ? `<span class="card_lugar">${lugar}</span>` : ''}
                 </div>
             </div>
@@ -147,6 +178,7 @@ function closeModal() {
 
 // Open modal on card click
 containerCards.addEventListener('click', (e) => {
+    if (e.target.closest('add-to-calendar-button')) return;
     const card = e.target.closest('.card');
     if (!card) return;
     openModal({

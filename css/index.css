@@ -263,6 +263,36 @@ body {
     }
 }
 
+@keyframes featuredGlow {
+    0%, 100% {
+        border-color: rgba(255, 255, 255, 0.22);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 16px rgba(255, 255, 255, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    50% {
+        border-color: rgba(255, 255, 255, 0.52);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 48px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+}
+
+.card_inner--featured {
+    background: rgba(255, 255, 255, 0.11);
+    animation: featuredGlow 3s ease-in-out infinite;
+}
+
+.card_inner--featured::before {
+    height: 3px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 60%, transparent 100%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+@media (hover: hover) {
+    .card_inner--featured:hover {
+        background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.55);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 50px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+}
+
 .card_inner.card--hidden {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -292,6 +322,17 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.3em;
+}
+
+.card_footer_row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+add-to-calendar-button {
+    flex-shrink: 0;
 }
 
 .card_ponencia {
